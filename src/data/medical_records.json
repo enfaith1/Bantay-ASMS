@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "animalId": 1,
+        "diagnosis": "Intake Exam",
+        "treatment": "Vaccination (5-in-1)",
+        "date": "2024-10-01"
+    },
+    {
+        "id": 2,
+        "animalId": 2,
+        "diagnosis": "Intake Exam",
+        "treatment": "Deworming",
+        "date": "2024-10-02"
+    },
+    {
+        "id": 3,
+        "animalId": 3,
+        "diagnosis": "Wing check",
+        "treatment": "None, healthy",
+        "date": "2024-10-05"
+    },
+    {
+        "id": 4,
+        "animalId": 1,
+        "diagnosis": "Pre-adoption checkup",
+        "treatment": "Cleared for adoption",
+        "date": "2024-10-27"
+    }
+]

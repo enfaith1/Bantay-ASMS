@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Maria Dela Cruz",
+        "contactPhone": "09171234567",
+        "address": "123 Mabini St, Davao City"
+    },
+    {
+        "id": 2,
+        "name": "Juan Santos",
+        "contactPhone": "09287654321",
+        "address": "456 Rizal St, Davao City"
+    }
+]

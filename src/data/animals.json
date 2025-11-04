@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Luna",
+    "species": "Dog",
+    "breed": "Aspin",
+    "age": 2,
+    "gender": "Female",
+    "sourceType": "BORN_IN_SHELTER",
+    "adoptionStatus": "Available",
+    "healthStatus": "Healthy"
+  },
+  {
+    "id": 2,
+    "name": "Buddy",
+    "species": "Dog",
+    "breed": "Labrador",
+    "age": 3,
+    "gender": "Male",
+    "sourceType": "SURRENDERED",
+    "adoptionStatus": "Available",
+    "healthStatus": "Healthy"
+  },
+  {
+    "id": 3,
+    "name": "Mimi",
+    "species": "Cat",
+    "breed": "Domestic Shorthair",
+    "age": 2,
+    "gender": "Female",
+    "sourceType": "RESCUED",
+    "adoptionStatus": "Available",
+    "healthStatus": "Needs Vaccination"
+  },
+  {
+    "id": 4,
+    "name": "Kiko",
+    "species": "Cat",
+    "breed": "Puspin",
+    "age": 1,
+    "gender": "Male",
+    "sourceType": "RESCUED",
+    "adoptionStatus": "Adopted",
+    "healthStatus": "Healthy"
+  }
+]
