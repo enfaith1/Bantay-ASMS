@@ -42,13 +42,13 @@ public class ShelterManager {
         adopters = new ArrayList<>();
         adoptions = new ArrayList<>();
         medicalRecords = new ArrayList<>();
-
-        // Load ALL data at startup
-        loadAnimalsFromJSON();
-//        loadAdoptersFromJSON();
-        loadMedicalRecordsFromJSON();
-//        loadAdoptionsFromJSON(); 
         
+        // --- MAKE SURE THESE ARE CALLED ---
+        loadAnimalsFromJSON();
+        loadAdoptersFromJSON(); // <-- This is the important one
+        loadMedicalRecordsFromJSON();
+//         loadAdoptionsFromJSON(); // (Add this when ready) 
+
         System.out.println("ShelterManager initialized and all data loaded.");
     }
 
@@ -221,21 +221,32 @@ public class ShelterManager {
     // =========================================================================
     private static JSONArray readAdoptersJSON() {
         JSONParser parser = new JSONParser();
-        JSONArray adopterList = new JSONArray();
-        File file = new File(FILE_PATH_ADOPTERS); // Use the correct file path
-
-        if (!file.exists() || file.length() == 0) {
-            System.out.println("adopters.json is empty or not found.");
-            return adopterList; // Return the empty list
-        }
-
-        try (FileReader reader = new FileReader(file)) {
-            adopterList = (JSONArray) parser.parse(reader);
+        try (Reader reader = new FileReader(FILE_PATH_ADOPTERS)) {
+            return (JSONArray) parser.parse(reader);
         } catch (IOException | ParseException e) {
-            System.out.println("Error reading adopters file: " + e.getMessage());
+            System.out.println("Error reading adopters.json: " + e.getMessage());
+            return new JSONArray();
         }
+    }
 
-        return adopterList;
+    public void loadAdoptersFromJSON() {
+       JSONArray adopterList = readAdoptersJSON();
+        adopters.clear();
+        for (Object obj : adopterList) {
+            JSONObject adopter = (JSONObject) obj;
+            try {
+                int id = ((Long) adopter.get("id")).intValue();
+                String name = (String) adopter.get("name");
+                String contact = (String) adopter.get("contactPhone");
+                String address = (String) adopter.get("address");
+
+                Adopter newAdopter = new Adopter(id, name, contact, address);
+                this.adopters.add(newAdopter);
+            } catch (Exception e) {
+                System.out.println("Failed to load adopter: " + adopter.get("name") + ". Error: " + e.getMessage());
+            }
+        }
+        System.out.println("Loaded " + adopters.size() + " adopters.");
     }
 
     public Animal findAnimalById(int id) {
@@ -347,16 +358,16 @@ public class ShelterManager {
 
     public void saveAdopters() {
         JSONArray adopterArray = new JSONArray();
-        for (Adopter a : adopters) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", a.getAdopterId());
-            obj.put("name", a.getName());
-            obj.put("contactPhone", a.getContactPhone());
-            obj.put("address", a.getAddress());
-            adopterArray.add(obj);
+        for (Adopter adopter : this.adopters) {
+            JSONObject adopterDetails = new JSONObject();
+            adopterDetails.put("id", adopter.getAdopterId());
+            adopterDetails.put("name", adopter.getName());
+            adopterDetails.put("contactPhone", adopter.getContactPhone());
+            adopterDetails.put("address", adopter.getAddress());
+            adopterArray.add(adopterDetails);
         }
 
-        try (FileWriter writer = new FileWriter(FILE_PATH_ADOPTERS, false)) {
+        try (FileWriter writer = new FileWriter(FILE_PATH_ADOPTERS, false)) { // false = overwrite
             writer.write(adopterArray.toJSONString());
             writer.flush();
         } catch (IOException e) {
@@ -364,9 +375,11 @@ public class ShelterManager {
         }
     }
 
-    public void addAdopter(Adopter a) {
-        adopters.add(a);
-        saveAdopters();
+    public void addAdopter(Adopter adopter) {
+        if (adopter != null) {
+            this.adopters.add(adopter);
+            saveAdopters(); // Save to file immediately
+        }
     }
 
     public ArrayList<Adopter> getAdopters() {

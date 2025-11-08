@@ -60,12 +60,13 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
 
         adoptionProcessingPanel2 = new javax.swing.JPanel();
         sidePanel2 = new javax.swing.JPanel();
-        bantayLbl2 = new javax.swing.JLabel();
         animalManagementBtn2 = new javax.swing.JButton();
         adoptionProcessingBtn2 = new javax.swing.JButton();
         medicalRecordsBtn2 = new javax.swing.JButton();
-        reportsBtn2 = new javax.swing.JButton();
         logoutBtn2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         topPanel = new javax.swing.JPanel();
         viewMedicalRecords = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -77,8 +78,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
         sidePanel2.setForeground(new java.awt.Color(0, 0, 0));
         sidePanel2.setToolTipText("");
 
-        bantayLbl2.setText("BANTAY");
-
+        animalManagementBtn2.setBackground(new java.awt.Color(255, 102, 0));
+        animalManagementBtn2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         animalManagementBtn2.setText("Animal Management");
         animalManagementBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +87,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             }
         });
 
+        adoptionProcessingBtn2.setBackground(new java.awt.Color(255, 102, 0));
+        adoptionProcessingBtn2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         adoptionProcessingBtn2.setText("Adoption Processing");
         adoptionProcessingBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +96,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             }
         });
 
+        medicalRecordsBtn2.setBackground(new java.awt.Color(255, 102, 0));
+        medicalRecordsBtn2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         medicalRecordsBtn2.setText("Medical Records");
         medicalRecordsBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,13 +105,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             }
         });
 
-        reportsBtn2.setText("Reports");
-        reportsBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportsBtn2ActionPerformed(evt);
-            }
-        });
-
+        logoutBtn2.setBackground(new java.awt.Color(255, 102, 0));
+        logoutBtn2.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         logoutBtn2.setText("Log Out");
         logoutBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,53 +114,70 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("AN ANIMAL SHELTER");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("BANTAY");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("MANAGEMENT SYSTEM");
+
         javax.swing.GroupLayout sidePanel2Layout = new javax.swing.GroupLayout(sidePanel2);
         sidePanel2.setLayout(sidePanel2Layout);
         sidePanel2Layout.setHorizontalGroup(
             sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(medicalRecordsBtn2)
-                .addGap(47, 47, 47))
             .addGroup(sidePanel2Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(logoutBtn2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(sidePanel2Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(bantayLbl2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(adoptionProcessingBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(sidePanel2Layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(animalManagementBtn2))
+                        .addGroup(sidePanel2Layout.createSequentialGroup()
+                            .addGap(72, 72, 72)
+                            .addComponent(logoutBtn2))))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
-                        .addComponent(reportsBtn2)
-                        .addGap(70, 70, 70))
+                        .addComponent(medicalRecordsBtn2)
+                        .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
-                        .addComponent(animalManagementBtn2)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
-                        .addComponent(adoptionProcessingBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                        .addGroup(sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanel2Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel1)
+                                .addGap(27, 27, 27))
+                            .addComponent(jLabel3)
+                            .addGroup(sidePanel2Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel2)))
+                        .addGap(48, 48, 48))))
         );
         sidePanel2Layout.setVerticalGroup(
             sidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(bantayLbl2)
-                .addGap(91, 91, 91)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(170, 170, 170)
                 .addComponent(animalManagementBtn2)
                 .addGap(18, 18, 18)
                 .addComponent(adoptionProcessingBtn2)
                 .addGap(18, 18, 18)
                 .addComponent(medicalRecordsBtn2)
-                .addGap(18, 18, 18)
-                .addComponent(reportsBtn2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addComponent(logoutBtn2)
                 .addGap(30, 30, 30))
         );
 
+        viewMedicalRecords.setBackground(new java.awt.Color(255, 102, 0));
+        viewMedicalRecords.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         viewMedicalRecords.setText("View Medical Records");
         viewMedicalRecords.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +185,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 102, 0));
+        jButton1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jButton1.setText("Add Medical Record");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,16 +203,15 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
                 .addComponent(viewMedicalRecords)
                 .addGap(28, 28, 28)
                 .addComponent(jButton1)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewMedicalRecords)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(viewMedicalRecords, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jBody.setLayout(new java.awt.BorderLayout());
@@ -204,7 +222,7 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
             adoptionProcessingPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adoptionProcessingPanel2Layout.createSequentialGroup()
                 .addComponent(sidePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(adoptionProcessingPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -256,13 +274,6 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
         this.dispose();
         System.out.println("Pass: MEDICAL RECORD - View Medical Records");
     }//GEN-LAST:event_medicalRecordsBtn2ActionPerformed
-
-    private void reportsBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsBtn2ActionPerformed
-        // TODO add your handling code here:
-        new ReportsFrame().setVisible(true);
-        setVisible(false);
-        System.out.println("Pass: REPORTS");
-    }//GEN-LAST:event_reportsBtn2ActionPerformed
 
     private void logoutBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtn2ActionPerformed
         // TODO add your handling code here:
@@ -326,12 +337,13 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
     private javax.swing.JButton adoptionProcessingBtn2;
     private javax.swing.JPanel adoptionProcessingPanel2;
     private javax.swing.JButton animalManagementBtn2;
-    private javax.swing.JLabel bantayLbl2;
     private javax.swing.JPanel jBody;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton logoutBtn2;
     private javax.swing.JButton medicalRecordsBtn2;
-    private javax.swing.JButton reportsBtn2;
     private javax.swing.JPanel sidePanel2;
     private javax.swing.JPanel topPanel;
     private javax.swing.JButton viewMedicalRecords;

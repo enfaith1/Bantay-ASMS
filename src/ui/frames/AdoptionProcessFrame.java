@@ -8,6 +8,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.JOptionPane;
 import main.ShelterManager;
+import ui.panels.adoptionprocess.AddAdopter;
 import ui.panels.animalmanagement.AnimalProfiles;
 import ui.panels.adoptionprocess.AdoptionRecords;
 import ui.panels.adoptionprocess.ProcessAdoption;
@@ -57,15 +58,17 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
 
         adoptionProcessingPanel = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
-        bantayLbl = new javax.swing.JLabel();
         animalManagementBtn = new javax.swing.JButton();
         adoptionProcessingBtn = new javax.swing.JButton();
         medicalRecordsBtn = new javax.swing.JButton();
-        reportsBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         topPanel = new javax.swing.JPanel();
         adoptionRecordsBtn = new javax.swing.JButton();
         processAdoptionBtn = new javax.swing.JButton();
+        addAdopterBtn = new javax.swing.JButton();
         jBody = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,8 +77,8 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
         sidePanel.setForeground(new java.awt.Color(0, 0, 0));
         sidePanel.setToolTipText("");
 
-        bantayLbl.setText("BANTAY");
-
+        animalManagementBtn.setBackground(new java.awt.Color(255, 102, 0));
+        animalManagementBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         animalManagementBtn.setText("Animal Management");
         animalManagementBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +86,8 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             }
         });
 
+        adoptionProcessingBtn.setBackground(new java.awt.Color(255, 102, 0));
+        adoptionProcessingBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         adoptionProcessingBtn.setText("Adoption Processing");
         adoptionProcessingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +95,8 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             }
         });
 
+        medicalRecordsBtn.setBackground(new java.awt.Color(255, 102, 0));
+        medicalRecordsBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         medicalRecordsBtn.setText("Medical Records");
         medicalRecordsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +104,8 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             }
         });
 
-        reportsBtn.setText("Reports");
-        reportsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportsBtnActionPerformed(evt);
-            }
-        });
-
+        logoutBtn.setBackground(new java.awt.Color(255, 102, 0));
+        logoutBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,53 +113,69 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("BANTAY");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("AN ANIMAL SHELTER");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("MANAGEMENT SYSTEM");
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidePanelLayout.createSequentialGroup()
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(medicalRecordsBtn))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(animalManagementBtn)
+                            .addComponent(adoptionProcessingBtn))))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(medicalRecordsBtn)
-                .addGap(47, 47, 47))
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
                 .addComponent(logoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(bantayLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(70, 70, 70))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(reportsBtn)
-                        .addGap(70, 70, 70))
+                        .addComponent(jLabel1)
+                        .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(animalManagementBtn)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(adoptionProcessingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2)
+                        .addGap(8, 8, 8)))
+                .addGap(39, 39, 39))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(bantayLbl)
-                .addGap(91, 91, 91)
+                .addGap(63, 63, 63)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(147, 147, 147)
                 .addComponent(animalManagementBtn)
                 .addGap(18, 18, 18)
                 .addComponent(adoptionProcessingBtn)
                 .addGap(18, 18, 18)
                 .addComponent(medicalRecordsBtn)
-                .addGap(18, 18, 18)
-                .addComponent(reportsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(logoutBtn)
                 .addGap(30, 30, 30))
         );
 
+        adoptionRecordsBtn.setBackground(new java.awt.Color(255, 102, 0));
+        adoptionRecordsBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         adoptionRecordsBtn.setText("Adoption Records");
         adoptionRecordsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,10 +183,21 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             }
         });
 
+        processAdoptionBtn.setBackground(new java.awt.Color(255, 102, 0));
+        processAdoptionBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         processAdoptionBtn.setText("Process Adoption");
         processAdoptionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 processAdoptionBtnActionPerformed(evt);
+            }
+        });
+
+        addAdopterBtn.setBackground(new java.awt.Color(255, 102, 0));
+        addAdopterBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        addAdopterBtn.setText("Add Adopter");
+        addAdopterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAdopterBtnActionPerformed(evt);
             }
         });
 
@@ -181,16 +210,19 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
                 .addComponent(adoptionRecordsBtn)
                 .addGap(18, 18, 18)
                 .addComponent(processAdoptionBtn)
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(addAdopterBtn)
+                .addContainerGap(642, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+            .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adoptionRecordsBtn)
-                    .addComponent(processAdoptionBtn))
-                .addContainerGap())
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(adoptionRecordsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addComponent(processAdoptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addAdopterBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jBody.setLayout(new java.awt.BorderLayout());
@@ -201,7 +233,7 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
             adoptionProcessingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adoptionProcessingPanelLayout.createSequentialGroup()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(adoptionProcessingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -253,13 +285,6 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
         System.out.println("Pass: MEDICAL RECORD");
     }//GEN-LAST:event_medicalRecordsBtnActionPerformed
 
-    private void reportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsBtnActionPerformed
-        // TODO add your handling code here:
-        new ReportsFrame().setVisible(true);
-        setVisible(false);
-        System.out.println("Pass: REPORTS");
-    }//GEN-LAST:event_reportsBtnActionPerformed
-
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Confirm Log Out", JOptionPane.YES_NO_OPTION);
@@ -280,6 +305,12 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
         showForm(new ProcessAdoption());
         System.out.println("Pass: ADOPTION PROCESSING - Process Adoption");
     }//GEN-LAST:event_processAdoptionBtnActionPerformed
+
+    private void addAdopterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAdopterBtnActionPerformed
+        // TODO add your handling code here:
+        showForm(new AddAdopter(this.shelterManager));
+        System.out.println("Pass: ADOPTION PROCESSING - Add Adopter");
+    }//GEN-LAST:event_addAdopterBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,16 +350,18 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAdopterBtn;
     private javax.swing.JButton adoptionProcessingBtn;
     private javax.swing.JPanel adoptionProcessingPanel;
     private javax.swing.JButton adoptionRecordsBtn;
     private javax.swing.JButton animalManagementBtn;
-    private javax.swing.JLabel bantayLbl;
     private javax.swing.JPanel jBody;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton medicalRecordsBtn;
     private javax.swing.JButton processAdoptionBtn;
-    private javax.swing.JButton reportsBtn;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables

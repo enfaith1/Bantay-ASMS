@@ -82,7 +82,7 @@ public class AddAnimal extends javax.swing.JPanel {
         dateArrivedLabel = new javax.swing.JLabel();
         dateArrivedJtf = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel1.setText("ADD ANIMAL");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

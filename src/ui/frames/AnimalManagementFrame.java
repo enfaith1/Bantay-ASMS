@@ -62,12 +62,13 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
 
         animalManagementPanel = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
-        bantayLbl = new javax.swing.JLabel();
         animalManagementBtn = new javax.swing.JButton();
         adoptionProcessingBtn = new javax.swing.JButton();
         medicalRecordsBtn = new javax.swing.JButton();
-        reportsBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         topPanel = new javax.swing.JPanel();
         viewAnimalProfilesBtn = new javax.swing.JButton();
         addAnimalBtn = new javax.swing.JButton();
@@ -79,8 +80,8 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
         sidePanel.setForeground(new java.awt.Color(0, 0, 0));
         sidePanel.setToolTipText("");
 
-        bantayLbl.setText("BANTAY");
-
+        animalManagementBtn.setBackground(new java.awt.Color(255, 102, 0));
+        animalManagementBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         animalManagementBtn.setText("Animal Management");
         animalManagementBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +89,8 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             }
         });
 
+        adoptionProcessingBtn.setBackground(new java.awt.Color(255, 102, 0));
+        adoptionProcessingBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         adoptionProcessingBtn.setText("Adoption Processing");
         adoptionProcessingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +98,8 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             }
         });
 
+        medicalRecordsBtn.setBackground(new java.awt.Color(255, 102, 0));
+        medicalRecordsBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         medicalRecordsBtn.setText("Medical Records");
         medicalRecordsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,13 +107,8 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             }
         });
 
-        reportsBtn.setText("Reports");
-        reportsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportsBtnActionPerformed(evt);
-            }
-        });
-
+        logoutBtn.setBackground(new java.awt.Color(255, 102, 0));
+        logoutBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,53 +116,68 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("AN ANIMAL SHELTER");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("BANTAY");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("MANAGEMENT SYSTEM");
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidePanelLayout.createSequentialGroup()
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(medicalRecordsBtn))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(animalManagementBtn)
+                            .addComponent(adoptionProcessingBtn)))
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(logoutBtn)))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(medicalRecordsBtn)
-                .addGap(47, 47, 47))
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(logoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(bantayLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(reportsBtn)
-                        .addGap(70, 70, 70))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(animalManagementBtn)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
-                        .addComponent(adoptionProcessingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27))
+                    .addComponent(jLabel3)
+                    .addGroup(sidePanelLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2)))
+                .addGap(49, 49, 49))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(bantayLbl)
-                .addGap(91, 91, 91)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(152, 152, 152)
                 .addComponent(animalManagementBtn)
                 .addGap(18, 18, 18)
                 .addComponent(adoptionProcessingBtn)
                 .addGap(18, 18, 18)
                 .addComponent(medicalRecordsBtn)
-                .addGap(18, 18, 18)
-                .addComponent(reportsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(logoutBtn)
                 .addGap(30, 30, 30))
         );
 
+        viewAnimalProfilesBtn.setBackground(new java.awt.Color(255, 102, 0));
+        viewAnimalProfilesBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         viewAnimalProfilesBtn.setText("View Animal Profiles");
         viewAnimalProfilesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +185,8 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             }
         });
 
+        addAnimalBtn.setBackground(new java.awt.Color(255, 102, 0));
+        addAnimalBtn.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         addAnimalBtn.setText("Add Animal");
         addAnimalBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,15 +203,15 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
                 .addComponent(viewAnimalProfilesBtn)
                 .addGap(18, 18, 18)
                 .addComponent(addAnimalBtn)
-                .addContainerGap(492, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewAnimalProfilesBtn)
-                    .addComponent(addAnimalBtn))
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(viewAnimalProfilesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAnimalBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -206,7 +223,7 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
             animalManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(animalManagementPanelLayout.createSequentialGroup()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(animalManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -282,13 +299,6 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
         System.out.println("Pass: MEDICAL RECORD");
     }//GEN-LAST:event_medicalRecordsBtnActionPerformed
 
-    private void reportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsBtnActionPerformed
-        // TODO add your handling code here:
-        new ReportsFrame().setVisible(true);
-        setVisible(false);
-        System.out.println("Pass: REPORTS");
-    }//GEN-LAST:event_reportsBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -332,11 +342,12 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
     private javax.swing.JButton adoptionProcessingBtn;
     private javax.swing.JButton animalManagementBtn;
     private javax.swing.JPanel animalManagementPanel;
-    private javax.swing.JLabel bantayLbl;
     private javax.swing.JPanel jBody;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton medicalRecordsBtn;
-    private javax.swing.JButton reportsBtn;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel topPanel;
     private javax.swing.JButton viewAnimalProfilesBtn;
