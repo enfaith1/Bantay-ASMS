@@ -8,6 +8,9 @@ import main.FontSetter;
 import main.TableStyle;
 import java.awt.*;
 import main.ShelterManager;
+import model.Animal; // <-- ADD THIS LINE
+import java.util.ArrayList; // <-- ADD THIS LINE
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,20 +20,28 @@ public class AnimalProfiles extends javax.swing.JPanel {
 
     private ShelterManager shelterManager;
 
-    /**
-     * Creates new form AnimalProfiles
-     */
     public AnimalProfiles(ShelterManager manager) {
+//        initComponents();
+//
+//        // 3. Save the manager
+//        this.shelterManager = manager;
+//
+//        // 4. Style the new table 
+//        TableStyle.styleTable(jTable1);
+//
+//        // 5. CALL THE CORRECT METHODS:
+//        // Call the method WITHOUT 'jTable1'. This loads animals into the list.
+//        this.shelterManager.loadAnimalsFromJSON();
+//
+//        // Now, populate the table FROM THAT LIST.
+//        this.shelterManager.populateAnimalTable(jTable1);
+
         initComponents();
-
-        // 3. Save the manager
         this.shelterManager = manager;
-
-        // 4. Style the new table 
         TableStyle.styleTable(jTable1);
 
-        // 5. CALL THE NEW METHOD to load data
-        shelterManager.loadAnimalsFromJSON(jTable1);
+        // Data is already loaded, just populate the table!
+        this.shelterManager.populateAnimalTable(jTable1);
     }
 
     /**
@@ -86,17 +97,17 @@ public class AnimalProfiles extends javax.swing.JPanel {
         jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "<html><div style='text-align: left;'>Id</div></html>", "Name", "Species", "Breed", "Age", "Source Type", "Adoption Status", "Health Status"
+                "<html><div style='text-align: left;'>Id</div></html>", "Name", "Species", "Breed", "Age", "Gender", "Source Type", "Adoption Status", "Health Status", "Date Arrived"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -172,8 +183,39 @@ public class AnimalProfiles extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        String searchText = jTextField1.getText().toLowerCase().trim();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear the table
+
+        // Get the full list from the manager
+        ArrayList<Animal> allAnimals = shelterManager.getAnimals();
+
+        for (Animal animal : allAnimals) {
+            String sourceString = animal.getSourceType().name().toLowerCase();
+            // Check if name, species, or breed contains the search text
+            if (animal.getName().toLowerCase().contains(searchText)
+                    || animal.getSpecies().toLowerCase().contains(searchText)
+                    || animal.getBreed().toLowerCase().contains(searchText)
+                    || animal.getGender().toLowerCase().contains(searchText)
+                    || sourceString.contains(searchText) || animal.getAdoptionStatus().toLowerCase().contains(searchText)
+                    || animal.getHealthStatus().toLowerCase().contains(searchText)) {
+
+                // Add matching animal to the table
+                model.addRow(new Object[]{
+                    animal.getId(),
+                    animal.getName(),
+                    animal.getSpecies(),
+                    animal.getBreed(),
+                    animal.getAge(),
+                    animal.getGender(),
+                    animal.getSourceType(),
+                    animal.getAdoptionStatus(),
+                    animal.getHealthStatus(),
+                    animal.getDateArrived()
+                });
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

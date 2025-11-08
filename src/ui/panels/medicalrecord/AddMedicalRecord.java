@@ -6,7 +6,7 @@ package ui.panels.medicalrecord;
 
 import main.ShelterManager;
 import model.Animal;
-import model.MedicalRecord;
+import model.MedicalRecordModel;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.util.*;
@@ -24,26 +24,39 @@ public class AddMedicalRecord extends javax.swing.JPanel {
     private ShelterManager shelterManager;
 
     public AddMedicalRecord(ShelterManager manager) {
-        initComponents(); // Call this only ONCE at the top
+        initComponents();
 
-        // Now you can safely save the manager
         this.shelterManager = manager;
 
-        // All your setup code now goes AFTER
         jtfAnimalId.setEditable(false);
         jtfAnimalId.setBackground(new Color(230, 230, 230));
 
-        // Fill the dropdown
+        // Fill the dropdown with animals
         populateAnimalDropdown();
+
+        // --- 1. AUTO-SET DATE and clear form ---
+        clearForm();
     }
 
     private void populateAnimalDropdown() {
-        ArrayList<Animal> animals = shelterManager.getAnimals(); // This works now
+        ArrayList<Animal> animals = shelterManager.getAnimals();
         jcbAnimalSelect.removeAllItems();
-        jcbAnimalSelect.addItem("Select an animal...");
+        jcbAnimalSelect.addItem("Select an animal..."); // Add a placeholder
         for (Animal a : animals) {
-            jcbAnimalSelect.addItem(a);
+            jcbAnimalSelect.addItem(a); // Uses Animal's toString() method
         }
+    }
+
+    private void clearForm() {
+        jcbAnimalSelect.setSelectedIndex(0); // Reset to "Select an animal..."
+        jtfAnimalId.setText("");
+        jtaDiagnosis.setText("");
+        jtaTreatment.setText("");
+
+        // --- 2. AUTO-SET DATE (using jTextField2) ---
+        jTextField2.setText(LocalDate.now().toString());
+        jTextField2.setEditable(false);
+        jTextField2.setBackground(new Color(230, 230, 230));
     }
 
     /**
@@ -56,7 +69,7 @@ public class AddMedicalRecord extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnSaveRecord = new javax.swing.JButton();
+        clearFieldsBtn = new javax.swing.JButton();
         jcbAnimalSelect = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jtfAnimalId = new javax.swing.JTextField();
@@ -70,12 +83,13 @@ public class AddMedicalRecord extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnSaveRecord1 = new javax.swing.JButton();
 
-        btnSaveRecord.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnSaveRecord.setText("Save");
-        btnSaveRecord.addActionListener(new java.awt.event.ActionListener() {
+        clearFieldsBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        clearFieldsBtn.setText("Clear Fields");
+        clearFieldsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveRecordActionPerformed(evt);
+                clearFieldsBtnActionPerformed(evt);
             }
         });
 
@@ -112,6 +126,14 @@ public class AddMedicalRecord extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel6.setText("ADD MEDICAL RECORD");
 
+        btnSaveRecord1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnSaveRecord1.setText("Save");
+        btnSaveRecord1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveRecord1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +142,6 @@ public class AddMedicalRecord extends javax.swing.JPanel {
                 .addContainerGap(150, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(btnSaveRecord)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -136,6 +157,15 @@ public class AddMedicalRecord extends javax.swing.JPanel {
                             .addComponent(jtfAnimalId)
                             .addComponent(jcbAnimalSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 154, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(clearFieldsBtn)
+                .addGap(246, 246, 246))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(535, Short.MAX_VALUE)
+                    .addComponent(btnSaveRecord1)
+                    .addGap(144, 144, 144)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +198,14 @@ public class AddMedicalRecord extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(54, 54, 54)
-                .addComponent(btnSaveRecord)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(clearFieldsBtn)
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(641, Short.MAX_VALUE)
+                    .addComponent(btnSaveRecord1)
+                    .addGap(79, 79, 79)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -187,10 +222,10 @@ public class AddMedicalRecord extends javax.swing.JPanel {
 
     private void jcbAnimalSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAnimalSelectActionPerformed
 
-        if (jcbAnimalSelect.getSelectedItem() instanceof Animal) {
-            // Get the selected Animal object
-            Animal selectedAnimal = (Animal) jcbAnimalSelect.getSelectedItem();
-            // Set the ID in the non-editable text field
+        Object selectedItem = jcbAnimalSelect.getSelectedItem();
+        if (selectedItem instanceof Animal) {
+            Animal selectedAnimal = (Animal) selectedItem;
+            // Update the read-only text field
             jtfAnimalId.setText(String.valueOf(selectedAnimal.getId()));
         } else {
             // "Select an animal..." was chosen
@@ -198,44 +233,67 @@ public class AddMedicalRecord extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jcbAnimalSelectActionPerformed
 
-    private void btnSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecordActionPerformed
+    private void clearFieldsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldsBtnActionPerformed
 
-        // 1. Get all data from the form
-        String animalIdStr = jtfAnimalId.getText();
-        String diagnosis = jtaDiagnosis.getText();
-        String treatment = jtaTreatment.getText();
-        LocalDate date = LocalDate.now();
+        int choice = JOptionPane.showConfirmDialog(
+                this, // Parent component
+                "Are you sure you want to clear this form?", // Message
+                "Confirm Clear", // Title
+                JOptionPane.YES_NO_OPTION, // Button type
+                JOptionPane.WARNING_MESSAGE // Message type
+        );
 
-        // 2. Validate the data
-        int animalId;
-        if (animalIdStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select an animal.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        } else {
-            animalId = Integer.parseInt(animalIdStr);
+        // Check if the user clicked "Yes"
+        if (choice == JOptionPane.YES_OPTION) {
+            clearForm();
         }
+    }//GEN-LAST:event_clearFieldsBtnActionPerformed
 
-        if (diagnosis.isBlank() || treatment.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter a diagnosis and treatment.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+    private void btnSaveRecord1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecord1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // 1. Validate animal selection
+            Object selectedItem = jcbAnimalSelect.getSelectedItem();
+            if (!(selectedItem instanceof Animal)) {
+                JOptionPane.showMessageDialog(this, "Please select an animal.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Animal selectedAnimal = (Animal) selectedItem;
+            int animalId = selectedAnimal.getId();
+
+            // 2. Validate text fields
+            String diagnosis = jtaDiagnosis.getText().trim();
+            String treatment = jtaTreatment.getText().trim();
+            if (diagnosis.isEmpty() || treatment.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Diagnosis and Treatment cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 3. Get auto-generated data
+            int recordId = shelterManager.getNextMedicalRecordId();
+            LocalDate date = LocalDate.parse(jTextField2.getText()); // Safe because we set it
+
+            // 4. Create new MedicalRecordModel object
+            // (Assuming "notes" can be an empty string)
+            MedicalRecordModel newRecord = new MedicalRecordModel(recordId, animalId, diagnosis, treatment, date, "");
+
+            // 5. Add via manager (which saves to JSON)
+            shelterManager.addMedicalRecord(newRecord);
+
+            // 6. Show success and clear form
+            JOptionPane.showMessageDialog(this, "Medical record (ID: " + recordId + ") saved successfully for " + selectedAnimal.getName() + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
+            clearForm();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred while saving: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
-
-        int newId = shelterManager.getNextMedicalRecordId();
-
-        model.MedicalRecord newRecord = new model.MedicalRecord(newId, animalId, diagnosis, treatment, date); 
-        shelterManager.addMedicalRecord(newRecord);
-
-        JOptionPane.showMessageDialog(this, "Medical record saved successfully! New ID: " + newId);
-
-        jcbAnimalSelect.setSelectedIndex(0);
-        jtfAnimalId.setText("");
-        jtaDiagnosis.setText("");
-        jtaTreatment.setText("");
-    }//GEN-LAST:event_btnSaveRecordActionPerformed
+    }//GEN-LAST:event_btnSaveRecord1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSaveRecord;
+    private javax.swing.JButton btnSaveRecord1;
+    private javax.swing.JButton clearFieldsBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

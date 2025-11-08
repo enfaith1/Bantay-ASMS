@@ -13,6 +13,7 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
@@ -33,7 +34,7 @@ public class ShelterManager {
     private ArrayList<model.Animal> animals;
     private ArrayList<Adopter> adopters;
     private ArrayList<Adoption> adoptions;
-    private ArrayList<MedicalRecord> medicalRecords;
+    private ArrayList<MedicalRecordModel> medicalRecords;
 
     public ShelterManager() {
         instance = this;
@@ -42,8 +43,17 @@ public class ShelterManager {
         adoptions = new ArrayList<>();
         medicalRecords = new ArrayList<>();
 
-        // Load all data on startup
-//        loadAdoptions();
+        // Load ALL data at startup
+        loadAnimalsFromJSON();
+//        loadAdoptersFromJSON();
+        loadMedicalRecordsFromJSON();
+//        loadAdoptionsFromJSON(); 
+        
+        System.out.println("ShelterManager initialized and all data loaded.");
+    }
+
+    public ArrayList<Animal> getAnimals() {
+        return this.animals;
     }
 
     private static JSONArray readAnimalsJSON() {
@@ -66,27 +76,95 @@ public class ShelterManager {
         return animalList;
     }
 
-    public static void loadAnimalsFromJSON(JTable table) {
+    public void loadAnimalsFromJSON() {
         JSONArray animalList = readAnimalsJSON(); // Read the file
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0); // Clear the table
+        animals.clear(); // Clear the existing list
 
-        // add each animal to the table
+        // add each animal to the internal list
         for (Object obj : animalList) {
             JSONObject animal = (JSONObject) obj;
 
-            // Use .get("keyName") just like your example
-            // The order here MUST match your JTable columns!
+            try {
+                // Parse all fields from JSON
+                int id = ((Long) animal.get("id")).intValue();
+                String name = (String) animal.get("name");
+                String species = (String) animal.get("species");
+                String breed = (String) animal.get("breed");
+                int age = ((Long) animal.get("age")).intValue();
+                String gender = (String) animal.get("gender");
+
+                // Safely parse SourceType
+                String sourceString = (String) animal.get("sourceType");
+                SourceType sourceType = SourceType.fromString(sourceString);
+
+                String adoptionStatus = (String) animal.get("adoptionStatus");
+                String healthStatus = (String) animal.get("healthStatus");
+
+                // --- 1. HANDLE dateArrived ---
+                String dateString = (String) animal.get("dateArrived");
+                LocalDate dateArrived = null; // Default to null
+
+                if (dateString != null && !dateString.isEmpty()) {
+                    try {
+                        // This will parse "2025-11-15"
+                        dateArrived = LocalDate.parse(dateString);
+                    } catch (DateTimeParseException e) {
+                        // This will catch bad data like "2D025-11-15"
+                        System.out.println("Could not parse date '" + dateString + "' for animal " + name + ". Setting to null.");
+                    }
+                }
+                // -----------------------------
+
+                // Create the correct object based on species (Polymorphism)
+                Animal newAnimal = null;
+                switch (species) {
+                    case "Dog":
+                        newAnimal = new Dog(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived); // <-- 2. PASS TO CONSTRUCTOR
+                        break;
+                    case "Cat":
+                        newAnimal = new Cat(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived); // <-- 2. PASS TO CONSTRUCTOR
+                        break;
+                    case "Bird":
+                        newAnimal = new Bird(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived); // <-- 2. PASS TO CONSTRUCTOR
+                        break;
+                    default:
+                        System.out.println("Unknown species: " + species);
+                }
+
+                if (newAnimal != null) {
+                    this.animals.add(newAnimal); // Add to the manager's list
+                }
+
+            } catch (Exception e) {
+                System.out.println("Failed to load animal: " + animal.get("name") + ". Error: " + e.getMessage());
+                e.printStackTrace(); // Good for debugging
+            }
+        }
+        System.out.println("Loaded " + animals.size() + " animals into ShelterManager.");
+    }
+
+    public void populateAnimalTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0); // Clear the table
+
+        // Loop through the 'animals' ArrayList that is already in memory
+        for (Animal animal : this.animals) {
+
+            // Add a new row using the getter methods from the Animal object
+            // This matches the 8 columns in AnimalProfiles
             model.addRow(new Object[]{
-                animal.get("id"),
-                animal.get("name"),
-                animal.get("species"),
-                animal.get("breed"),
-                animal.get("age"),
-                animal.get("gender"),
-                animal.get("sourceType"),
-                animal.get("adoptionStatus"),
-                animal.get("healthStatus")
+                animal.getId(),
+                animal.getName(),
+                animal.getSpecies(),
+                animal.getBreed(),
+                animal.getAge(),
+                animal.getGender(),
+                animal.getSourceType(), // This correctly adds the Enum
+                animal.getAdoptionStatus(),
+                animal.getHealthStatus(), // This correctly adds the Enum
+                animal.getDateArrived()
+            // We don't add healthStatus or dateArrived here
+            // because your table only has 8 columns
             });
         }
     }
@@ -94,29 +172,36 @@ public class ShelterManager {
     public void saveAnimals() {
         JSONArray animalArray = new JSONArray();
 
-        for (Animal a : animals) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", a.getId());
-            obj.put("name", a.getName());
-            obj.put("species", a.getSpecies());
-            obj.put("age", a.getAge());
+        // Loop through the ArrayList, not the table
+        for (Animal animal : this.animals) {
+            JSONObject animalDetails = new JSONObject();
+            animalDetails.put("id", animal.getId());
+            animalDetails.put("name", animal.getName());
+            animalDetails.put("species", animal.getSpecies());
+            animalDetails.put("breed", animal.getBreed());
+            animalDetails.put("age", animal.getAge());
+            animalDetails.put("gender", animal.getGender());
 
-            // Detect subclass type and save specific data
-            if (a instanceof Dog d) {
-                obj.put("breed", d.getBreed());
-                obj.put("isTrained", d.isTrained());
-            } else if (a instanceof Cat c) {
-                obj.put("color", c.getColor());
-                obj.put("isIndoor", c.isIndoor());
-            } else if (a instanceof Bird b) {
-                obj.put("speciesType", b.getSpeciesType());
-                obj.put("canTalk", b.canTalk());
+            // Convert Enum back to String for JSON
+            animalDetails.put("sourceType", animal.getSourceType().name());
+
+            animalDetails.put("adoptionStatus", animal.getAdoptionStatus());
+            animalDetails.put("healthStatus", animal.getHealthStatus());
+
+            // --- 3. HANDLE dateArrived ---
+            // Convert LocalDate back to String, handle null
+            if (animal.getDateArrived() != null) {
+                animalDetails.put("dateArrived", animal.getDateArrived().toString());
+            } else {
+                animalDetails.put("dateArrived", null);
             }
+            // -----------------------------
 
-            animalArray.add(obj);
+            animalArray.add(animalDetails);
         }
 
-        try (FileWriter writer = new FileWriter(FILE_PATH_ANIMALS, false)) { // false to overwrite
+        // Write to file (overwrite)
+        try (FileWriter writer = new FileWriter(FILE_PATH_ANIMALS, false)) {
             writer.write(animalArray.toJSONString());
             writer.flush();
         } catch (IOException e) {
@@ -124,13 +209,11 @@ public class ShelterManager {
         }
     }
 
-    public void addAnimal(Animal a) {
-        animals.add(a);
-        saveAnimals();
-    }
-
-    public ArrayList<Animal> getAnimals() {
-        return animals;
+    public void addAnimal(Animal animal) {
+        if (animal != null) {
+            this.animals.add(animal);
+            saveAnimals(); // Save the new animal to animals.json
+        }
     }
 
     // =========================================================================
@@ -156,12 +239,12 @@ public class ShelterManager {
     }
 
     public Animal findAnimalById(int id) {
-        for (Animal animal : animals) {
+        for (Animal animal : this.animals) {
             if (animal.getId() == id) {
                 return animal;
             }
         }
-        return null;
+        return null; // Not found
     }
 
     public Adopter findAdopterById(int id) {
@@ -367,22 +450,53 @@ public class ShelterManager {
         return medicalList;
     }
 
-    public static void loadMedicalRecordsFromJSON(JTable table) {
-        JSONArray medicalList = readMedicalRecordsJSON(); // Read the file
+    public void loadMedicalRecordsFromJSON() {
+        JSONArray recordList = readMedicalRecordsJSON(); // (Assumes you have a readMedicalRecordsJSON() static method)
+        medicalRecords.clear();
+
+        for (Object obj : recordList) {
+            JSONObject record = (JSONObject) obj;
+
+            try {
+                int recordId = ((Long) record.get("id")).intValue();
+                int animalId = ((Long) record.get("animalId")).intValue();
+                String diagnosis = (String) record.get("diagnosis");
+                String treatment = (String) record.get("treatment");
+                String notes = (String) record.get("notes"); // Get notes (might be null)
+                LocalDate date = LocalDate.parse((String) record.get("date"));
+
+                // Use the constructor from MedicalRecordModel.java
+                MedicalRecordModel newRecord = new MedicalRecordModel(recordId, animalId, diagnosis, treatment, date, notes);
+                this.medicalRecords.add(newRecord);
+
+            } catch (Exception e) {
+                System.out.println("Failed to load medical record: " + record.get("id") + ". Error: " + e.getMessage());
+            }
+        }
+        System.out.println("Loaded " + medicalRecords.size() + " medical records.");
+    }
+
+    public void populateMedicalRecordTable(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0); // Clear the table
 
-        // add each medical record to the table
-        for (Object obj : medicalList) {
-            JSONObject record = (JSONObject) obj;
+        for (MedicalRecordModel record : this.medicalRecords) {
+            // --- This is where we get the name ---
+            Animal animal = findAnimalById(record.getAnimalId());
+            String animalName = "Unknown (ID: " + record.getAnimalId() + ")"; // Default if animal is missing
+            if (animal != null) {
+                animalName = animal.getName();
+            }
+            // ------------------------------------
 
-            // Use .get("keyName") just like your example
             model.addRow(new Object[]{
-                record.get("id"),
-                record.get("animalId"),
-                record.get("date"),
-                record.get("diagnosis"),
-                record.get("treatment")
+                record.getRecordId(),
+                animalName, // <-- Here is the animal NAME
+                record.getDate(),
+                record.getDiagnosis(),
+                record.getTreatment()
+            // (Assumes your table has 5 columns: ID, Animal Name, Date, Diagnosis, Treatment)
+            // (Adjust this row to match your JTable's columns in the design)
             });
         }
     }
@@ -391,8 +505,8 @@ public class ShelterManager {
     public void saveMedicalRecords() {
         JSONArray recordArray = new JSONArray();
 
-        // Loop over the ArrayList of MedicalRecord OBJECTS
-        for (model.MedicalRecord a : medicalRecords) {
+        // Loop over the ArrayList of MedicalRecordModel OBJECTS
+        for (model.MedicalRecordModel a : medicalRecords) {
             JSONObject obj = new JSONObject();
 
             // Use the getters from the object
@@ -414,12 +528,12 @@ public class ShelterManager {
         }
     }
 
-    public void addMedicalRecord(MedicalRecord a) {
+    public void addMedicalRecord(MedicalRecordModel a) {
         medicalRecords.add(a);
         saveMedicalRecords();
     }
 
-    public ArrayList<MedicalRecord> getMedicalRecords() {
+    public ArrayList<MedicalRecordModel> getMedicalRecords() {
         return medicalRecords;
     }
 
@@ -450,7 +564,7 @@ public class ShelterManager {
 
     public int getNextMedicalRecordId() {
         return medicalRecords.stream()
-                .mapToInt(MedicalRecord::getId)
+                .mapToInt(MedicalRecordModel::getRecordId) // <-- THIS IS THE FIX
                 .max()
                 .orElse(0) + 1;
     }

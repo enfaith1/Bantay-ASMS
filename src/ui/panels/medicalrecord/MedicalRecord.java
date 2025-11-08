@@ -12,14 +12,19 @@ import main.*;
  */
 public class MedicalRecord extends javax.swing.JPanel {
 
+    private ShelterManager shelterManager;
+
     /**
      * Creates new form MedicalRecord
      */
-    public MedicalRecord() {
+    public MedicalRecord(ShelterManager manager) {
         initComponents();
-        ShelterManager.loadMedicalRecordsFromJSON(jTable1);
+        this.shelterManager = manager;
+
+        // Call the new method to populate the table
+        this.shelterManager.populateMedicalRecordTable(jTable1);
+
         TableStyle.styleTable(jTable1);
-        
     }
 
     /**
@@ -51,7 +56,7 @@ public class MedicalRecord extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "<html><div style='text-align: left;'>Id</div></html>", "Animal Id", "Date", "Diagnosis", "Treatment"
+                "<html><div style='text-align: left;'>Id</div></html>", "Name", "Date", "Diagnosis", "Treatment"
             }
         ) {
             boolean[] canEdit = new boolean [] {

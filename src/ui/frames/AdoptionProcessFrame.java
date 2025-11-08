@@ -18,11 +18,17 @@ import ui.panels.adoptionprocess.ProcessAdoption;
  */
 public class AdoptionProcessFrame extends javax.swing.JFrame {
 
+    private ShelterManager shelterManager;
+
     /**
      * Creates new form AdoptionProcessFrame
      */
-    public AdoptionProcessFrame() {
+    public AdoptionProcessFrame(ShelterManager manager) {
         initComponents();
+
+        // --- 3. SAVE THE MANAGER ---
+        this.shelterManager = manager;
+
         this.setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
 
@@ -241,7 +247,8 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
 
     private void medicalRecordsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicalRecordsBtnActionPerformed
         // TODO add your handling code here:
-        new MedicalRecordFrame().setVisible(true);
+        ShelterManager manager = new ShelterManager();
+        new MedicalRecordFrame(manager).setVisible(true);
         setVisible(false);
         System.out.println("Pass: MEDICAL RECORD");
     }//GEN-LAST:event_medicalRecordsBtnActionPerformed
@@ -304,7 +311,9 @@ public class AdoptionProcessFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdoptionProcessFrame().setVisible(true);
+//                new AdoptionProcessFrame().setVisible(true);
+                ShelterManager manager = new ShelterManager();
+                new AdoptionProcessFrame(manager).setVisible(true);
             }
         });
     }

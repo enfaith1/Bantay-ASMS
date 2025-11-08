@@ -1,30 +1,25 @@
-[
-    {
-        "id": 1,
-        "animalId": 1,
-        "diagnosis": "Intake Exam",
+[{
+        "date": "2024-10-01",
         "treatment": "Vaccination (5-in-1)",
-        "date": "2024-10-01"
-    },
-    {
-        "id": 2,
-        "animalId": 2,
         "diagnosis": "Intake Exam",
+        "id": 1,
+        "animalId": 1
+    }, {
+        "date": "2024-10-02",
         "treatment": "Deworming",
-        "date": "2024-10-02"
-    },
-    {
-        "id": 3,
-        "animalId": 3,
-        "diagnosis": "Wing check",
+        "diagnosis": "Intake Exam",
+        "id": 2,
+        "animalId": 2
+    }, {
+        "date": "2024-10-05",
         "treatment": "None, healthy",
-        "date": "2024-10-05"
-    },
-    {
-        "id": 4,
-        "animalId": 1,
-        "diagnosis": "Pre-adoption checkup",
+        "diagnosis": "Wing check",
+        "id": 3,
+        "animalId": 3
+    }, {
+        "date": "2024-10-27",
         "treatment": "Cleared for adoption",
-        "date": "2024-10-27"
-    }
-]
+        "diagnosis": "Pre-adoption checkup",
+        "id": 4,
+        "animalId": 1
+    }]

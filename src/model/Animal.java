@@ -8,6 +8,7 @@ package model;
  *
  * @author Aspire-5
  */
+import java.time.LocalDate; // <-- 1. ADD THIS IMPORT
 import model.SourceType;
 
 public abstract class Animal {
@@ -22,10 +23,11 @@ public abstract class Animal {
     protected SourceType sourceType;
     protected String adoptionStatus;
     protected String healthStatus;
+    protected LocalDate dateArrived; // <-- 2. ADD THIS FIELD
 
     public Animal(int id, String name, String species, String breed, int age,
             String gender, SourceType sourceType, String adoptionStatus,
-            String healthStatus) {
+            String healthStatus, LocalDate dateArrived) { // <-- 3. ADD TO CONSTRUCTOR
         this.id = id;
         this.name = name;
         this.species = species;
@@ -35,6 +37,7 @@ public abstract class Animal {
         this.sourceType = sourceType;
         this.adoptionStatus = adoptionStatus;
         this.healthStatus = healthStatus;
+        this.dateArrived = dateArrived; // <-- 4. SET THE FIELD
     }
 
     // Abstract method for Polymorphism
@@ -77,6 +80,11 @@ public abstract class Animal {
         return healthStatus;
     }
 
+    // 5. ADD GETTER
+    public LocalDate getDateArrived() {
+        return dateArrived;
+    }
+
     // toString() for the JComboBox
     @Override
     public String toString() {
@@ -106,5 +114,10 @@ public abstract class Animal {
 
     public void setSourceType(SourceType sourceType) {
         this.sourceType = sourceType;
+    }
+
+    // 6. ADD SETTER
+    public void setDateArrived(LocalDate dateArrived) {
+        this.dateArrived = dateArrived;
     }
 }

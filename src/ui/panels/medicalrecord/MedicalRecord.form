@@ -103,7 +103,7 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="4">
                         <Column editable="false" title="&lt;html&gt;&lt;div style=&apos;text-align: left;&apos;&gt;Id&lt;/div&gt;&lt;/html&gt;" type="java.lang.Object"/>
-                        <Column editable="false" title="Animal Id" type="java.lang.Object"/>
+                        <Column editable="false" title="Name" type="java.lang.Object"/>
                         <Column editable="false" title="Date" type="java.lang.Object"/>
                         <Column editable="false" title="Diagnosis" type="java.lang.Object"/>
                         <Column editable="false" title="Treatment" type="java.lang.Object"/>

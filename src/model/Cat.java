@@ -8,13 +8,16 @@ package model;
  *
  * @author Aspire-5
  */
+import java.time.LocalDate; // <-- ADD THIS IMPORT
+
 public class Cat extends Animal {
 
     // The constructor just passes all info to the parent
     public Cat(int id, String name, String breed, int age, String gender,
-            SourceType sourceType, String adoptionStatus, String healthStatus) {
+            SourceType sourceType, String adoptionStatus, String healthStatus,
+            LocalDate dateArrived) { // <-- 1. ADD TO CONSTRUCTOR
 
-        super(id, name, "Cat", breed, age, gender, sourceType, adoptionStatus, healthStatus);
+        super(id, name, "Cat", breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived); // <-- 2. PASS TO SUPER
     }
 
     @Override

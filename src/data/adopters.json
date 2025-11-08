@@ -10,5 +10,53 @@
         "name": "Juan Santos",
         "contactPhone": "09287654321",
         "address": "456 Rizal St, Davao City"
+    },
+    {
+        "id": 3,
+        "name": "Jose Reyes",
+        "contactPhone": "09198877665",
+        "address": "789 Bonifacio St, Brgy. Poblacion, Davao City"
+    },
+    {
+        "id": 4,
+        "name": "Ana Garcia",
+        "contactPhone": "09081122334",
+        "address": "101 Obrero, Davao City"
+    },
+    {
+        "id": 5,
+        "name": "Pedro Fernandez",
+        "contactPhone": "09229876543",
+        "address": "222 Matina Crossing, Davao City"
+    },
+    {
+        "id": 6,
+        "name": "Sofia Mercado",
+        "contactPhone": "09451231231",
+        "address": "333 Ecoland, Phase 1, Davao City"
+    },
+    {
+        "id": 7,
+        "name": "Luis Aquino",
+        "contactPhone": "09173344556",
+        "address": "444 Buhangin Rd, Davao City"
+    },
+    {
+        "id": 8,
+        "name": "Clara Lim",
+        "contactPhone": "09284455667",
+        "address": "555 Quirino Ave, Brgy. 76-A, Davao City"
+    },
+    {
+        "id": 9,
+        "name": "Miguel Tan",
+        "contactPhone": "09995566778",
+        "address": "678 Jacinto St, Davao City"
+    },
+    {
+        "id": 10,
+        "name": "Lita Gonzales",
+        "contactPhone": "09396677889",
+        "address": "901 Ponciano St, Davao City"
     }
 ]

@@ -238,8 +238,7 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
 
     private void adoptionProcessingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adoptionProcessingBtnActionPerformed
         // TODO add your handling code here:
-        AdoptionProcessFrame adoptionProcess = new AdoptionProcessFrame();
-        adoptionProcess.setVisible(true);
+        new AdoptionProcessFrame(this.shelterManager).setVisible(true);
         this.dispose();
         System.out.println("Pass: ADOPTION PROCESS");
     }//GEN-LAST:event_adoptionProcessingBtnActionPerformed
@@ -268,14 +267,18 @@ public class AnimalManagementFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_animalManagementBtnActionPerformed
 
     private void addAnimalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnimalBtnActionPerformed
-        showForm(new AddAnimal());
+        AddAnimal addAnimalPanel = new AddAnimal(this.shelterManager); // <-- THIS IS THE FIX
+        jBody.removeAll();
+        jBody.add(addAnimalPanel, java.awt.BorderLayout.CENTER);
+        jBody.revalidate();
+        jBody.repaint();
         System.out.println("Pass: ANIMAL MANAGEMENT - Add Animal");
     }//GEN-LAST:event_addAnimalBtnActionPerformed
 
     private void medicalRecordsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicalRecordsBtnActionPerformed
         // TODO add your handling code here:
-        new MedicalRecordFrame().setVisible(true);
-        setVisible(false);
+        new MedicalRecordFrame(this.shelterManager).setVisible(true);
+        this.dispose();
         System.out.println("Pass: MEDICAL RECORD");
     }//GEN-LAST:event_medicalRecordsBtnActionPerformed
 

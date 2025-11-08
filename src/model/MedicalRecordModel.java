@@ -10,7 +10,7 @@ package model;
  */
 import java.time.LocalDate;
 
-public class MedicalRecord {
+public class MedicalRecordModel {
 
     private int recordId;
     private int animalId;
@@ -19,7 +19,7 @@ public class MedicalRecord {
     private LocalDate date;
     private String notes;
 
-    public MedicalRecord(int recordId, int animalId, String diagnosis, String treatment, LocalDate date, String notes) {
+    public MedicalRecordModel(int recordId, int animalId, String diagnosis, String treatment, LocalDate date, String notes) {
         this.recordId = recordId;
         this.animalId = animalId;
         this.diagnosis = diagnosis;

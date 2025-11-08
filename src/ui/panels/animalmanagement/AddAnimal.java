@@ -4,17 +4,48 @@
  */
 package ui.panels.animalmanagement;
 
+import main.ShelterManager;
+import model.Animal;
+import model.Bird;
+import model.Cat;
+import model.Dog;
+import model.SourceType;
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+
 /**
  *
  * @author Nat
  */
 public class AddAnimal extends javax.swing.JPanel {
 
+    private ShelterManager shelterManager;
+
     /**
      * Creates new form AddAnimal
      */
-    public AddAnimal() {
+    public AddAnimal(ShelterManager manager) {
         initComponents();
+        this.shelterManager = manager;
+        setNextAnimalIdAndDefaults(); // Call helper method
+    }
+
+    private void setNextAnimalIdAndDefaults() {
+        if (shelterManager != null) {
+            // Get and set the next ID
+            int nextId = shelterManager.getNextAnimalId();
+            idJtf.setText(String.valueOf(nextId));
+            idJtf.setEditable(false); // Make ID read-only
+
+            // Set good defaults
+            adoptionStatusJtf.setText("Available");
+            healthStatusJtf.setText("Needs Checkup");
+
+            // Set dateArrived to today's date
+            // NOTE: Your Animal.java constructor [cite: Animal.java] does NOT accept a date.
+            // This field will be ignored when saving unless you update your model classes.
+            dateArrivedJtf.setText(LocalDate.now().toString());
+        }
     }
 
     /**
@@ -37,15 +68,19 @@ public class AddAnimal extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        idJtf = new javax.swing.JTextField();
+        nameJtf = new javax.swing.JTextField();
+        speciesJtf = new javax.swing.JTextField();
+        breedJtf = new javax.swing.JTextField();
+        ageJtf = new javax.swing.JTextField();
+        genderJtf = new javax.swing.JTextField();
+        sourceTypeJtf = new javax.swing.JTextField();
+        adoptionStatusJtf = new javax.swing.JTextField();
+        healthStatusJtf = new javax.swing.JTextField();
+        addAnimalBtn = new javax.swing.JButton();
+        clearFieldsBtn = new javax.swing.JButton();
+        dateArrivedLabel = new javax.swing.JLabel();
+        dateArrivedJtf = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("ADD ANIMAL");
@@ -77,10 +112,91 @@ public class AddAnimal extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setText("Health Status:");
 
+        idJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idJtfActionPerformed(evt);
+            }
+        });
+
+        nameJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameJtfActionPerformed(evt);
+            }
+        });
+
+        speciesJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                speciesJtfActionPerformed(evt);
+            }
+        });
+
+        breedJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breedJtfActionPerformed(evt);
+            }
+        });
+
+        ageJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ageJtfActionPerformed(evt);
+            }
+        });
+
+        genderJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genderJtfActionPerformed(evt);
+            }
+        });
+
+        sourceTypeJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sourceTypeJtfActionPerformed(evt);
+            }
+        });
+
+        adoptionStatusJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adoptionStatusJtfActionPerformed(evt);
+            }
+        });
+
+        healthStatusJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                healthStatusJtfActionPerformed(evt);
+            }
+        });
+
+        addAnimalBtn.setText("Add Animal");
+        addAnimalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAnimalBtnActionPerformed(evt);
+            }
+        });
+
+        clearFieldsBtn.setText("Clear Fields");
+        clearFieldsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearFieldsBtnActionPerformed(evt);
+            }
+        });
+
+        dateArrivedLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        dateArrivedLabel.setText("Date Arrived:");
+
+        dateArrivedJtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateArrivedJtfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(465, 465, 465))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(123, 123, 123)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -91,40 +207,49 @@ public class AddAnimal extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)))
+                            .addComponent(speciesJtf)
+                            .addComponent(breedJtf)
+                            .addComponent(ageJtf)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(idJtf)
+                            .addComponent(nameJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(168, 168, 168)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(dateArrivedLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dateArrivedJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(genderJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(adoptionStatusJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(27, 27, 27)
+                                .addComponent(sourceTypeJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(healthStatusJtf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(165, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(27, 27, 27)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(165, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(465, 465, 465))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(clearFieldsBtn)
+                        .addGap(80, 80, 80)
+                        .addComponent(addAnimalBtn)
+                        .addGap(90, 90, 90))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,36 +261,43 @@ public class AddAnimal extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(genderJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(sourceTypeJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(idJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(66, 66, 66)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(nameJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(speciesJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(adoptionStatusJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(breedJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(healthStatusJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(ageJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dateArrivedLabel)
+                        .addComponent(dateArrivedJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clearFieldsBtn)
+                    .addComponent(addAnimalBtn))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -183,8 +315,152 @@ public class AddAnimal extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void idJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idJtfActionPerformed
+
+    private void nameJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameJtfActionPerformed
+
+    private void speciesJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speciesJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_speciesJtfActionPerformed
+
+    private void breedJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breedJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_breedJtfActionPerformed
+
+    private void ageJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ageJtfActionPerformed
+
+    private void genderJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genderJtfActionPerformed
+
+    private void sourceTypeJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceTypeJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sourceTypeJtfActionPerformed
+
+    private void adoptionStatusJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adoptionStatusJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adoptionStatusJtfActionPerformed
+
+    private void healthStatusJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_healthStatusJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_healthStatusJtfActionPerformed
+
+    private void dateArrivedJtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateArrivedJtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateArrivedJtfActionPerformed
+
+    private void addAnimalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnimalBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // 1. Get ID (it's pre-filled and non-editable)
+            int id = Integer.parseInt(idJtf.getText());
+
+            // 2. Get data from fields
+            String name = nameJtf.getText().trim();
+            String species = speciesJtf.getText().trim();
+            String breed = breedJtf.getText().trim();
+            String ageText = ageJtf.getText().trim();
+            String gender = genderJtf.getText().trim();
+            String sourceText = sourceTypeJtf.getText().trim();
+            String adoptionStatus = adoptionStatusJtf.getText().trim();
+            String healthStatus = healthStatusJtf.getText().trim();
+            String dateString = dateArrivedJtf.getText().trim(); // We ignore this, see note
+
+            // 3. Validation
+            if (name.isEmpty() || species.isEmpty() || breed.isEmpty() || gender.isEmpty() || ageText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Name, Species, Breed, Age, and Gender cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 4. Parse numbers and enums safely
+            int age = Integer.parseInt(ageText);
+            SourceType sourceType = SourceType.fromString(sourceText); // Uses your safe method
+
+            LocalDate dateArrived;
+            try {
+                dateArrived = LocalDate.parse(dateArrivedJtf.getText().trim());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Invalid Date Arrived format. Please use YYYY-MM-DD.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return; // Stop if the date is bad
+            }
+
+            // 5. Create Animal object based on species
+            Animal newAnimal = null;
+            switch (species) {
+                case "Dog":
+                    newAnimal = new Dog(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived);
+                    break;
+                case "Cat":
+                    newAnimal = new Cat(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived);
+                    break;
+                case "Bird":
+                    newAnimal = new Bird(id, name, breed, age, gender, sourceType, adoptionStatus, healthStatus, dateArrived);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Unknown species. Please enter 'Dog', 'Cat', or 'Bird'.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+            }
+
+            // 6. Add via manager (which also saves)
+            if (newAnimal != null) {
+                shelterManager.addAnimal(newAnimal);
+                JOptionPane.showMessageDialog(this, "Animal '" + name + "' added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                clearFieldsBtn.doClick(); // Click the "Clear" button for the user
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid age. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_addAnimalBtnActionPerformed
+
+    private void clearFieldsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldsBtnActionPerformed
+        // TODO add your handling code here:
+        // 1. Show confirmation dialog
+        int choice = JOptionPane.showConfirmDialog(
+                this, // Parent component
+                "Are you sure you want to clear all fields?", // Message
+                "Confirm Clear", // Title
+                JOptionPane.YES_NO_OPTION, // Button type
+                JOptionPane.WARNING_MESSAGE // Message type
+        );
+
+        // 2. Check if the user clicked "Yes"
+        if (choice == JOptionPane.YES_OPTION) {
+            // Clear all fields
+            nameJtf.setText("");
+            speciesJtf.setText("");
+            breedJtf.setText("");
+            ageJtf.setText("");
+            genderJtf.setText("");
+            sourceTypeJtf.setText("");
+            // Note: We don't clear the default/auto-filled fields
+
+            // Reset ID and defaults
+            setNextAnimalIdAndDefaults();
+        }
+    }//GEN-LAST:event_clearFieldsBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAnimalBtn;
+    private javax.swing.JTextField adoptionStatusJtf;
+    private javax.swing.JTextField ageJtf;
+    private javax.swing.JTextField breedJtf;
+    private javax.swing.JButton clearFieldsBtn;
+    private javax.swing.JTextField dateArrivedJtf;
+    private javax.swing.JLabel dateArrivedLabel;
+    private javax.swing.JTextField genderJtf;
+    private javax.swing.JTextField healthStatusJtf;
+    private javax.swing.JTextField idJtf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -196,14 +472,8 @@ public class AddAnimal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField nameJtf;
+    private javax.swing.JTextField sourceTypeJtf;
+    private javax.swing.JTextField speciesJtf;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,14 +21,22 @@ import ui.panels.medicalrecord.*;
  */
 public class MedicalRecordFrame extends javax.swing.JFrame {
 
+    private ShelterManager shelterManager;
+
     /**
      * Creates new form MedicalRecordFrame
      */
-    public MedicalRecordFrame() {
+    public MedicalRecordFrame(ShelterManager manager) {
         initComponents();
+
+        // --- 3. SAVE THE MANAGER ---
+        this.shelterManager = manager;
+
         this.setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        showForm(new MedicalRecord());
+
+        // --- 4. PASS THE MANAGER TO THE PANEL ---
+        showForm(new MedicalRecord(this.shelterManager));
         System.out.println("Pass: MEDICAL RECORD - View Medical Records");
 
     }
@@ -236,14 +244,16 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
 
     private void adoptionProcessingBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adoptionProcessingBtn2ActionPerformed
         // TODO add your handling code here:
-        new AdoptionProcessFrame().setVisible(true);
+        ShelterManager manager = new ShelterManager();
+        new AdoptionProcessFrame(manager).setVisible(true);
         setVisible(false);
         System.out.println("Pass: ADOPTION PROCESSING - View Adoption Records");
     }//GEN-LAST:event_adoptionProcessingBtn2ActionPerformed
 
     private void medicalRecordsBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicalRecordsBtn2ActionPerformed
         // TODO add your handling code here:
-        showForm(new MedicalRecord());
+        new MedicalRecordFrame(this.shelterManager).setVisible(true);
+        this.dispose();
         System.out.println("Pass: MEDICAL RECORD - View Medical Records");
     }//GEN-LAST:event_medicalRecordsBtn2ActionPerformed
 
@@ -266,14 +276,14 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtn2ActionPerformed
 
     private void viewMedicalRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMedicalRecordsActionPerformed
-        showForm(new MedicalRecord());
+        showForm(new MedicalRecord(this.shelterManager));
         System.out.println("Pass: MEDICAL RECORD - View Medical Records");
     }//GEN-LAST:event_viewMedicalRecordsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        showForm(new AddMedicalRecord(ShelterManager.instance));
-         System.out.println("Pass: MEDICAL RECORD - Add Medical Record");
+       showForm(new AddMedicalRecord(this.shelterManager));
+        System.out.println("Pass: MEDICAL RECORD - Add Medical Record");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -306,7 +316,8 @@ public class MedicalRecordFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MedicalRecordFrame().setVisible(true);
+                ShelterManager manager = new ShelterManager();
+                new MedicalRecordFrame(manager).setVisible(true);
             }
         });
     }
