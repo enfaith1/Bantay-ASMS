@@ -17,8 +17,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class TableStyle {
 
-    public static FontSetter fs = new FontSetter();
-
     public static void styleTable(JTable table) {
         table.setAutoCreateRowSorter(true);
 

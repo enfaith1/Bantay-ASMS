@@ -22,4 +22,10 @@
         "diagnosis": "Pre-adoption checkup",
         "id": 4,
         "animalId": 1
+    }, {
+        "date": "2025-11-08",
+        "treatment": "treatment test",
+        "diagnosis": "diagnosis test",
+        "id": 5,
+        "animalId": 1
     }]

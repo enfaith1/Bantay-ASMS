@@ -4,7 +4,6 @@
  */
 package ui.panels.animalmanagement;
 
-import main.FontSetter;
 import main.TableStyle;
 import java.awt.*;
 import main.ShelterManager;

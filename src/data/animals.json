@@ -218,4 +218,15 @@
         "id": 20,
         "breed": "Aspin",
         "age": 1
+    }, {
+        "adoptionStatus": "Available",
+        "gender": "Male",
+        "species": "Dog",
+        "sourceType": "RESCUED",
+        "healthStatus": "Needs Checkup",
+        "dateArrived": "2025-11-08",
+        "name": "Natt",
+        "id": 21,
+        "breed": "Dalmation",
+        "age": 2
     }]
